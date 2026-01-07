@@ -1,4 +1,4 @@
-// Copyright (c) 2023 The Chromium Embedded Framework Authors. All rights
+// Copyright (c) 2025 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 //
@@ -9,10 +9,11 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=c677cabce869cc187866e07f53fcf235018d8978$
+// $hash=34c21edf0ddb3d28717f7e5d4727ea3f3f31e912$
 //
 
 #include "libcef_dll/ctocpp/preference_registrar_ctocpp.h"
+
 #include "libcef_dll/ctocpp/value_ctocpp.h"
 
 // VIRTUAL METHODS - Body may be edited by hand.
@@ -21,8 +22,8 @@ NO_SANITIZE("cfi-icall")
 bool CefPreferenceRegistrarCToCpp::AddPreference(
     const CefString& name,
     CefRefPtr<CefValue> default_value) {
-  cef_preference_registrar_t* _struct = GetStruct();
-  if (CEF_MEMBER_MISSING(_struct, add_preference)) {
+  auto* _struct = GetStruct();
+  if (!_struct->add_preference) {
     return false;
   }
 
@@ -41,7 +42,7 @@ bool CefPreferenceRegistrarCToCpp::AddPreference(
 
   // Execute
   int _retval = _struct->add_preference(_struct, name.GetStruct(),
-                                        CefValueCToCpp::Unwrap(default_value));
+                                        CefValueCToCpp_Unwrap(default_value));
 
   // Return type: bool
   return _retval ? true : false;
@@ -60,7 +61,7 @@ cef_preference_registrar_t* CefCToCppScoped<CefPreferenceRegistrarCToCpp,
                                             CefPreferenceRegistrar,
                                             cef_preference_registrar_t>::
     UnwrapDerivedOwn(CefWrapperType type, CefOwnPtr<CefPreferenceRegistrar> c) {
-  DCHECK(false) << "Unexpected class type: " << type;
+  CHECK(false) << __func__ << " called with unexpected class type " << type;
   return nullptr;
 }
 
@@ -69,7 +70,7 @@ cef_preference_registrar_t* CefCToCppScoped<CefPreferenceRegistrarCToCpp,
                                             CefPreferenceRegistrar,
                                             cef_preference_registrar_t>::
     UnwrapDerivedRaw(CefWrapperType type, CefRawPtr<CefPreferenceRegistrar> c) {
-  DCHECK(false) << "Unexpected class type: " << type;
+  CHECK(false) << __func__ << " called with unexpected class type " << type;
   return nullptr;
 }
 

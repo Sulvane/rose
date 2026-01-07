@@ -1,4 +1,4 @@
-// Copyright (c) 2023 The Chromium Embedded Framework Authors. All rights
+// Copyright (c) 2025 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 //
@@ -9,10 +9,11 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=c3caec6488343dacaf00231a9304bcd4b3c95d9e$
+// $hash=8838ab440f473c5f16b8c5853c1257e834ba54fa$
 //
 
 #include "libcef_dll/cpptoc/write_handler_cpptoc.h"
+
 #include "libcef_dll/shutdown_checker.h"
 
 namespace {
@@ -138,7 +139,7 @@ CefRefPtr<CefWriteHandler> CefCppToCRefCounted<
     CefWriteHandler,
     cef_write_handler_t>::UnwrapDerived(CefWrapperType type,
                                         cef_write_handler_t* s) {
-  DCHECK(false) << "Unexpected class type: " << type;
+  CHECK(false) << __func__ << " called with unexpected class type " << type;
   return nullptr;
 }
 

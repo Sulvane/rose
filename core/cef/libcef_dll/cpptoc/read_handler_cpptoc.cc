@@ -1,4 +1,4 @@
-// Copyright (c) 2023 The Chromium Embedded Framework Authors. All rights
+// Copyright (c) 2025 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 //
@@ -9,10 +9,11 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=297d49ea4c02ae7ca19359c30bdcac380a45d95c$
+// $hash=b0a045358d00bcab88b8fb28445e32ddc9815008$
 //
 
 #include "libcef_dll/cpptoc/read_handler_cpptoc.h"
+
 #include "libcef_dll/shutdown_checker.h"
 
 namespace {
@@ -136,7 +137,7 @@ template <>
 CefRefPtr<CefReadHandler>
 CefCppToCRefCounted<CefReadHandlerCppToC, CefReadHandler, cef_read_handler_t>::
     UnwrapDerived(CefWrapperType type, cef_read_handler_t* s) {
-  DCHECK(false) << "Unexpected class type: " << type;
+  CHECK(false) << __func__ << " called with unexpected class type " << type;
   return nullptr;
 }
 

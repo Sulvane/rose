@@ -1,4 +1,4 @@
-// Copyright (c) 2023 The Chromium Embedded Framework Authors. All rights
+// Copyright (c) 2025 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 //
@@ -9,7 +9,7 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=614f17d01c97522a373ef4a4710202bbe6b76d11$
+// $hash=ea795c8d2083501232a28e904d062cf028cf60a4$
 //
 
 #ifndef CEF_LIBCEF_DLL_CTOCPP_TASK_RUNNER_CTOCPP_H_
@@ -40,5 +40,8 @@ class CefTaskRunnerCToCpp : public CefCToCppRefCounted<CefTaskRunnerCToCpp,
   bool PostTask(CefRefPtr<CefTask> task) override;
   bool PostDelayedTask(CefRefPtr<CefTask> task, int64_t delay_ms) override;
 };
+
+constexpr auto CefTaskRunnerCToCpp_Wrap = CefTaskRunnerCToCpp::Wrap;
+constexpr auto CefTaskRunnerCToCpp_Unwrap = CefTaskRunnerCToCpp::Unwrap;
 
 #endif  // CEF_LIBCEF_DLL_CTOCPP_TASK_RUNNER_CTOCPP_H_

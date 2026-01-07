@@ -1,4 +1,4 @@
-// Copyright (c) 2023 The Chromium Embedded Framework Authors. All rights
+// Copyright (c) 2025 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 //
@@ -9,10 +9,11 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=786c2d8a0269b342c7c3ee49f5bb337341072d31$
+// $hash=d1a4aec1ec77e9b7c6acc2ddc9f8202e0bde2d59$
 //
 
 #include "libcef_dll/cpptoc/test/test_server_handler_cpptoc.h"
+
 #include "libcef_dll/ctocpp/request_ctocpp.h"
 #include "libcef_dll/ctocpp/test/test_server_connection_ctocpp.h"
 #include "libcef_dll/ctocpp/test/test_server_ctocpp.h"
@@ -24,8 +25,8 @@ namespace {
 
 int CEF_CALLBACK test_server_handler_on_test_server_request(
     struct _cef_test_server_handler_t* self,
-    cef_test_server_t* server,
-    cef_request_t* request,
+    struct _cef_test_server_t* server,
+    struct _cef_request_t* request,
     struct _cef_test_server_connection_t* connection) {
   shutdown_checker::AssertNotShutdown();
 
@@ -53,8 +54,8 @@ int CEF_CALLBACK test_server_handler_on_test_server_request(
 
   // Execute
   bool _retval = CefTestServerHandlerCppToC::Get(self)->OnTestServerRequest(
-      CefTestServerCToCpp::Wrap(server), CefRequestCToCpp::Wrap(request),
-      CefTestServerConnectionCToCpp::Wrap(connection));
+      CefTestServerCToCpp_Wrap(server), CefRequestCToCpp_Wrap(request),
+      CefTestServerConnectionCToCpp_Wrap(connection));
 
   // Return type: bool
   return _retval;
@@ -81,7 +82,7 @@ CefRefPtr<CefTestServerHandler> CefCppToCRefCounted<
     CefTestServerHandler,
     cef_test_server_handler_t>::UnwrapDerived(CefWrapperType type,
                                               cef_test_server_handler_t* s) {
-  DCHECK(false) << "Unexpected class type: " << type;
+  CHECK(false) << __func__ << " called with unexpected class type " << type;
   return nullptr;
 }
 

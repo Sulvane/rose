@@ -1,4 +1,4 @@
-// Copyright (c) 2023 The Chromium Embedded Framework Authors. All rights
+// Copyright (c) 2025 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 //
@@ -9,7 +9,7 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=199035206a81ce991d025997baf3e64007d74c65$
+// $hash=aa8522d6cab2f99e637c7e4dfb1d3f562f596edf$
 //
 
 #ifndef CEF_LIBCEF_DLL_CTOCPP_RESOURCE_SKIP_CALLBACK_CTOCPP_H_
@@ -37,5 +37,10 @@ class CefResourceSkipCallbackCToCpp
   // CefResourceSkipCallback methods.
   void Continue(int64_t bytes_skipped) override;
 };
+
+constexpr auto CefResourceSkipCallbackCToCpp_Wrap =
+    CefResourceSkipCallbackCToCpp::Wrap;
+constexpr auto CefResourceSkipCallbackCToCpp_Unwrap =
+    CefResourceSkipCallbackCToCpp::Unwrap;
 
 #endif  // CEF_LIBCEF_DLL_CTOCPP_RESOURCE_SKIP_CALLBACK_CTOCPP_H_

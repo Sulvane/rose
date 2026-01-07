@@ -1,4 +1,4 @@
-// Copyright (c) 2023 The Chromium Embedded Framework Authors. All rights
+// Copyright (c) 2025 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 //
@@ -9,10 +9,11 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=b4b1529613a3609c6d5eee063c2f633475e0c68c$
+// $hash=1b2ae1f2618332a128e4c9a60afdaf88e92c7d4b$
 //
 
 #include "libcef_dll/cpptoc/audio_handler_cpptoc.h"
+
 #include "libcef_dll/ctocpp/browser_ctocpp.h"
 #include "libcef_dll/shutdown_checker.h"
 
@@ -48,7 +49,7 @@ audio_handler_get_audio_parameters(struct _cef_audio_handler_t* self,
 
   // Execute
   bool _retval = CefAudioHandlerCppToC::Get(self)->GetAudioParameters(
-      CefBrowserCToCpp::Wrap(browser), paramsVal);
+      CefBrowserCToCpp_Wrap(browser), paramsVal);
 
   // Restore param: params; type: simple_byref
   if (params) {
@@ -88,7 +89,7 @@ audio_handler_on_audio_stream_started(struct _cef_audio_handler_t* self,
 
   // Execute
   CefAudioHandlerCppToC::Get(self)->OnAudioStreamStarted(
-      CefBrowserCToCpp::Wrap(browser), paramsVal, channels);
+      CefBrowserCToCpp_Wrap(browser), paramsVal, channels);
 }
 
 void CEF_CALLBACK
@@ -118,7 +119,7 @@ audio_handler_on_audio_stream_packet(struct _cef_audio_handler_t* self,
 
   // Execute
   CefAudioHandlerCppToC::Get(self)->OnAudioStreamPacket(
-      CefBrowserCToCpp::Wrap(browser), data, frames, pts);
+      CefBrowserCToCpp_Wrap(browser), data, frames, pts);
 }
 
 void CEF_CALLBACK
@@ -140,7 +141,7 @@ audio_handler_on_audio_stream_stopped(struct _cef_audio_handler_t* self,
 
   // Execute
   CefAudioHandlerCppToC::Get(self)->OnAudioStreamStopped(
-      CefBrowserCToCpp::Wrap(browser));
+      CefBrowserCToCpp_Wrap(browser));
 }
 
 void CEF_CALLBACK
@@ -168,7 +169,7 @@ audio_handler_on_audio_stream_error(struct _cef_audio_handler_t* self,
 
   // Execute
   CefAudioHandlerCppToC::Get(self)->OnAudioStreamError(
-      CefBrowserCToCpp::Wrap(browser), CefString(message));
+      CefBrowserCToCpp_Wrap(browser), CefString(message));
 }
 
 }  // namespace
@@ -195,7 +196,7 @@ CefRefPtr<CefAudioHandler> CefCppToCRefCounted<
     CefAudioHandler,
     cef_audio_handler_t>::UnwrapDerived(CefWrapperType type,
                                         cef_audio_handler_t* s) {
-  DCHECK(false) << "Unexpected class type: " << type;
+  CHECK(false) << __func__ << " called with unexpected class type " << type;
   return nullptr;
 }
 

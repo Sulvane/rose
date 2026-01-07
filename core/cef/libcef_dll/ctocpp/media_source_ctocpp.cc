@@ -1,4 +1,4 @@
-// Copyright (c) 2023 The Chromium Embedded Framework Authors. All rights
+// Copyright (c) 2025 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 //
@@ -9,10 +9,11 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=f05652f759e16a6f2a3bc5f640ede99e3e123b4d$
+// $hash=cf9da7c6e72ad081fee8669176cc436742870a75$
 //
 
 #include "libcef_dll/ctocpp/media_source_ctocpp.h"
+
 #include "libcef_dll/shutdown_checker.h"
 
 // VIRTUAL METHODS - Body may be edited by hand.
@@ -20,8 +21,8 @@
 NO_SANITIZE("cfi-icall") CefString CefMediaSourceCToCpp::GetId() {
   shutdown_checker::AssertNotShutdown();
 
-  cef_media_source_t* _struct = GetStruct();
-  if (CEF_MEMBER_MISSING(_struct, get_id)) {
+  auto* _struct = GetStruct();
+  if (!_struct->get_id) {
     return CefString();
   }
 
@@ -39,8 +40,8 @@ NO_SANITIZE("cfi-icall") CefString CefMediaSourceCToCpp::GetId() {
 NO_SANITIZE("cfi-icall") bool CefMediaSourceCToCpp::IsCastSource() {
   shutdown_checker::AssertNotShutdown();
 
-  cef_media_source_t* _struct = GetStruct();
-  if (CEF_MEMBER_MISSING(_struct, is_cast_source)) {
+  auto* _struct = GetStruct();
+  if (!_struct->is_cast_source) {
     return false;
   }
 
@@ -56,8 +57,8 @@ NO_SANITIZE("cfi-icall") bool CefMediaSourceCToCpp::IsCastSource() {
 NO_SANITIZE("cfi-icall") bool CefMediaSourceCToCpp::IsDialSource() {
   shutdown_checker::AssertNotShutdown();
 
-  cef_media_source_t* _struct = GetStruct();
-  if (CEF_MEMBER_MISSING(_struct, is_dial_source)) {
+  auto* _struct = GetStruct();
+  if (!_struct->is_dial_source) {
     return false;
   }
 
@@ -84,7 +85,7 @@ template <>
 cef_media_source_t*
 CefCToCppRefCounted<CefMediaSourceCToCpp, CefMediaSource, cef_media_source_t>::
     UnwrapDerived(CefWrapperType type, CefMediaSource* c) {
-  DCHECK(false) << "Unexpected class type: " << type;
+  CHECK(false) << __func__ << " called with unexpected class type " << type;
   return nullptr;
 }
 

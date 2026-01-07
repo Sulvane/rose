@@ -1,4 +1,4 @@
-// Copyright (c) 2023 The Chromium Embedded Framework Authors. All rights
+// Copyright (c) 2025 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 //
@@ -9,7 +9,7 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=4422e2d57ebf8624ca57ad064cd78963c5de26ba$
+// $hash=cfc0b56031e809ddf9ed10fb443d44cfe3bba451$
 //
 
 #ifndef CEF_LIBCEF_DLL_CTOCPP_DOWNLOAD_ITEM_CTOCPP_H_
@@ -54,5 +54,8 @@ class CefDownloadItemCToCpp : public CefCToCppRefCounted<CefDownloadItemCToCpp,
   CefString GetContentDisposition() override;
   CefString GetMimeType() override;
 };
+
+constexpr auto CefDownloadItemCToCpp_Wrap = CefDownloadItemCToCpp::Wrap;
+constexpr auto CefDownloadItemCToCpp_Unwrap = CefDownloadItemCToCpp::Unwrap;
 
 #endif  // CEF_LIBCEF_DLL_CTOCPP_DOWNLOAD_ITEM_CTOCPP_H_

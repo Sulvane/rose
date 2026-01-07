@@ -1,4 +1,4 @@
-// Copyright (c) 2023 The Chromium Embedded Framework Authors. All rights
+// Copyright (c) 2025 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 //
@@ -9,7 +9,7 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=f46aa5f341aa11d832e6e90847eaa3fa3c8a84a8$
+// $hash=3e712e96bde4ab43384ffec5c574d883a6e42d89$
 //
 
 #ifndef CEF_LIBCEF_DLL_CTOCPP_SERVER_CTOCPP_H_
@@ -59,5 +59,8 @@ class CefServerCToCpp
                             const void* data,
                             size_t data_size) override;
 };
+
+constexpr auto CefServerCToCpp_Wrap = CefServerCToCpp::Wrap;
+constexpr auto CefServerCToCpp_Unwrap = CefServerCToCpp::Unwrap;
 
 #endif  // CEF_LIBCEF_DLL_CTOCPP_SERVER_CTOCPP_H_

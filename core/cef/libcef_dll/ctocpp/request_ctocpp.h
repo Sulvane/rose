@@ -1,4 +1,4 @@
-// Copyright (c) 2023 The Chromium Embedded Framework Authors. All rights
+// Copyright (c) 2025 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 //
@@ -9,7 +9,7 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=cede9199ca4b019787a67fe4bc2cb739759f3cd6$
+// $hash=fb082010980729ac1030227e67abf1be149ea669$
 //
 
 #ifndef CEF_LIBCEF_DLL_CTOCPP_REQUEST_CTOCPP_H_
@@ -62,5 +62,8 @@ class CefRequestCToCpp
   TransitionType GetTransitionType() override;
   uint64_t GetIdentifier() override;
 };
+
+constexpr auto CefRequestCToCpp_Wrap = CefRequestCToCpp::Wrap;
+constexpr auto CefRequestCToCpp_Unwrap = CefRequestCToCpp::Unwrap;
 
 #endif  // CEF_LIBCEF_DLL_CTOCPP_REQUEST_CTOCPP_H_

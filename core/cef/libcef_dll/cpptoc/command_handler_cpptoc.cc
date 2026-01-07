@@ -1,4 +1,4 @@
-// Copyright (c) 2023 The Chromium Embedded Framework Authors. All rights
+// Copyright (c) 2025 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 //
@@ -9,10 +9,11 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=04f92bf7dfa4cfeec409e2418f69e63beff276ff$
+// $hash=83ded4d5780153c6ed595d4ea6006085ac6f79b8$
 //
 
 #include "libcef_dll/cpptoc/command_handler_cpptoc.h"
+
 #include "libcef_dll/ctocpp/browser_ctocpp.h"
 #include "libcef_dll/shutdown_checker.h"
 
@@ -22,7 +23,7 @@ namespace {
 
 int CEF_CALLBACK
 command_handler_on_chrome_command(struct _cef_command_handler_t* self,
-                                  cef_browser_t* browser,
+                                  struct _cef_browser_t* browser,
                                   int command_id,
                                   cef_window_open_disposition_t disposition) {
   shutdown_checker::AssertNotShutdown();
@@ -41,7 +42,7 @@ command_handler_on_chrome_command(struct _cef_command_handler_t* self,
 
   // Execute
   bool _retval = CefCommandHandlerCppToC::Get(self)->OnChromeCommand(
-      CefBrowserCToCpp::Wrap(browser), command_id, disposition);
+      CefBrowserCToCpp_Wrap(browser), command_id, disposition);
 
   // Return type: bool
   return _retval;
@@ -49,7 +50,7 @@ command_handler_on_chrome_command(struct _cef_command_handler_t* self,
 
 int CEF_CALLBACK command_handler_is_chrome_app_menu_item_visible(
     struct _cef_command_handler_t* self,
-    cef_browser_t* browser,
+    struct _cef_browser_t* browser,
     int command_id) {
   shutdown_checker::AssertNotShutdown();
 
@@ -67,7 +68,7 @@ int CEF_CALLBACK command_handler_is_chrome_app_menu_item_visible(
 
   // Execute
   bool _retval = CefCommandHandlerCppToC::Get(self)->IsChromeAppMenuItemVisible(
-      CefBrowserCToCpp::Wrap(browser), command_id);
+      CefBrowserCToCpp_Wrap(browser), command_id);
 
   // Return type: bool
   return _retval;
@@ -75,7 +76,7 @@ int CEF_CALLBACK command_handler_is_chrome_app_menu_item_visible(
 
 int CEF_CALLBACK command_handler_is_chrome_app_menu_item_enabled(
     struct _cef_command_handler_t* self,
-    cef_browser_t* browser,
+    struct _cef_browser_t* browser,
     int command_id) {
   shutdown_checker::AssertNotShutdown();
 
@@ -93,7 +94,7 @@ int CEF_CALLBACK command_handler_is_chrome_app_menu_item_enabled(
 
   // Execute
   bool _retval = CefCommandHandlerCppToC::Get(self)->IsChromeAppMenuItemEnabled(
-      CefBrowserCToCpp::Wrap(browser), command_id);
+      CefBrowserCToCpp_Wrap(browser), command_id);
 
   // Return type: bool
   return _retval;
@@ -169,7 +170,7 @@ CefRefPtr<CefCommandHandler> CefCppToCRefCounted<
     CefCommandHandler,
     cef_command_handler_t>::UnwrapDerived(CefWrapperType type,
                                           cef_command_handler_t* s) {
-  DCHECK(false) << "Unexpected class type: " << type;
+  CHECK(false) << __func__ << " called with unexpected class type " << type;
   return nullptr;
 }
 

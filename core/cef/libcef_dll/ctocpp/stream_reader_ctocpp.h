@@ -1,4 +1,4 @@
-// Copyright (c) 2023 The Chromium Embedded Framework Authors. All rights
+// Copyright (c) 2025 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 //
@@ -9,7 +9,7 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=f9d6d1b80e4e2d30bddc9eb6e473c1f530186654$
+// $hash=091c56659b0c8081e1e4b3bac990519482ec4554$
 //
 
 #ifndef CEF_LIBCEF_DLL_CTOCPP_STREAM_READER_CTOCPP_H_
@@ -40,5 +40,8 @@ class CefStreamReaderCToCpp : public CefCToCppRefCounted<CefStreamReaderCToCpp,
   int Eof() override;
   bool MayBlock() override;
 };
+
+constexpr auto CefStreamReaderCToCpp_Wrap = CefStreamReaderCToCpp::Wrap;
+constexpr auto CefStreamReaderCToCpp_Unwrap = CefStreamReaderCToCpp::Unwrap;
 
 #endif  // CEF_LIBCEF_DLL_CTOCPP_STREAM_READER_CTOCPP_H_

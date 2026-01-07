@@ -1,4 +1,4 @@
-// Copyright (c) 2023 The Chromium Embedded Framework Authors. All rights
+// Copyright (c) 2025 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 //
@@ -9,10 +9,11 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=8b65a39b9871e8185e8923ef48a54dd38e42af95$
+// $hash=cd6035ccbb05420388ed02d5064c333b22757ffe$
 //
 
 #include "libcef_dll/cpptoc/test/translator_test_scoped_client_cpptoc.h"
+
 #include "libcef_dll/cpptoc/test/translator_test_scoped_client_child_cpptoc.h"
 
 namespace {
@@ -55,11 +56,11 @@ CefCppToCScoped<CefTranslatorTestScopedClientCppToC,
     UnwrapDerivedOwn(CefWrapperType type,
                      cef_translator_test_scoped_client_t* s) {
   if (type == WT_TRANSLATOR_TEST_SCOPED_CLIENT_CHILD) {
-    return CefTranslatorTestScopedClientChildCppToC::UnwrapOwn(
+    return CefTranslatorTestScopedClientChildCppToC_UnwrapOwn(
         reinterpret_cast<cef_translator_test_scoped_client_child_t*>(s));
   }
-  DCHECK(false) << "Unexpected class type: " << type;
-  return CefOwnPtr<CefTranslatorTestScopedClient>();
+  CHECK(false) << __func__ << " called with unexpected class type " << type;
+  return nullptr;
 }
 
 template <>
@@ -70,10 +71,10 @@ CefCppToCScoped<CefTranslatorTestScopedClientCppToC,
     UnwrapDerivedRaw(CefWrapperType type,
                      cef_translator_test_scoped_client_t* s) {
   if (type == WT_TRANSLATOR_TEST_SCOPED_CLIENT_CHILD) {
-    return CefTranslatorTestScopedClientChildCppToC::UnwrapRaw(
+    return CefTranslatorTestScopedClientChildCppToC_UnwrapRaw(
         reinterpret_cast<cef_translator_test_scoped_client_child_t*>(s));
   }
-  DCHECK(false) << "Unexpected class type: " << type;
+  CHECK(false) << __func__ << " called with unexpected class type " << type;
   return nullptr;
 }
 

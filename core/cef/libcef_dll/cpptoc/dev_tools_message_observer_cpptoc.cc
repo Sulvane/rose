@@ -1,4 +1,4 @@
-// Copyright (c) 2023 The Chromium Embedded Framework Authors. All rights
+// Copyright (c) 2025 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 //
@@ -9,10 +9,11 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=d32b3a49e312971ee0c825fe765c584c033d65e9$
+// $hash=7f89b1c3455efbf3b9380edf3ebb84122895647c$
 //
 
 #include "libcef_dll/cpptoc/dev_tools_message_observer_cpptoc.h"
+
 #include "libcef_dll/ctocpp/browser_ctocpp.h"
 #include "libcef_dll/shutdown_checker.h"
 
@@ -22,7 +23,7 @@ namespace {
 
 int CEF_CALLBACK dev_tools_message_observer_on_dev_tools_message(
     struct _cef_dev_tools_message_observer_t* self,
-    cef_browser_t* browser,
+    struct _cef_browser_t* browser,
     const void* message,
     size_t message_size) {
   shutdown_checker::AssertNotShutdown();
@@ -46,7 +47,7 @@ int CEF_CALLBACK dev_tools_message_observer_on_dev_tools_message(
 
   // Execute
   bool _retval = CefDevToolsMessageObserverCppToC::Get(self)->OnDevToolsMessage(
-      CefBrowserCToCpp::Wrap(browser), message, message_size);
+      CefBrowserCToCpp_Wrap(browser), message, message_size);
 
   // Return type: bool
   return _retval;
@@ -54,7 +55,7 @@ int CEF_CALLBACK dev_tools_message_observer_on_dev_tools_message(
 
 void CEF_CALLBACK dev_tools_message_observer_on_dev_tools_method_result(
     struct _cef_dev_tools_message_observer_t* self,
-    cef_browser_t* browser,
+    struct _cef_browser_t* browser,
     int message_id,
     int success,
     const void* result,
@@ -76,13 +77,13 @@ void CEF_CALLBACK dev_tools_message_observer_on_dev_tools_method_result(
 
   // Execute
   CefDevToolsMessageObserverCppToC::Get(self)->OnDevToolsMethodResult(
-      CefBrowserCToCpp::Wrap(browser), message_id, success ? true : false,
+      CefBrowserCToCpp_Wrap(browser), message_id, success ? true : false,
       result, result_size);
 }
 
 void CEF_CALLBACK dev_tools_message_observer_on_dev_tools_event(
     struct _cef_dev_tools_message_observer_t* self,
-    cef_browser_t* browser,
+    struct _cef_browser_t* browser,
     const cef_string_t* method,
     const void* params,
     size_t params_size) {
@@ -108,12 +109,12 @@ void CEF_CALLBACK dev_tools_message_observer_on_dev_tools_event(
 
   // Execute
   CefDevToolsMessageObserverCppToC::Get(self)->OnDevToolsEvent(
-      CefBrowserCToCpp::Wrap(browser), CefString(method), params, params_size);
+      CefBrowserCToCpp_Wrap(browser), CefString(method), params, params_size);
 }
 
 void CEF_CALLBACK dev_tools_message_observer_on_dev_tools_agent_attached(
     struct _cef_dev_tools_message_observer_t* self,
-    cef_browser_t* browser) {
+    struct _cef_browser_t* browser) {
   shutdown_checker::AssertNotShutdown();
 
   // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
@@ -130,12 +131,12 @@ void CEF_CALLBACK dev_tools_message_observer_on_dev_tools_agent_attached(
 
   // Execute
   CefDevToolsMessageObserverCppToC::Get(self)->OnDevToolsAgentAttached(
-      CefBrowserCToCpp::Wrap(browser));
+      CefBrowserCToCpp_Wrap(browser));
 }
 
 void CEF_CALLBACK dev_tools_message_observer_on_dev_tools_agent_detached(
     struct _cef_dev_tools_message_observer_t* self,
-    cef_browser_t* browser) {
+    struct _cef_browser_t* browser) {
   shutdown_checker::AssertNotShutdown();
 
   // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
@@ -152,7 +153,7 @@ void CEF_CALLBACK dev_tools_message_observer_on_dev_tools_agent_detached(
 
   // Execute
   CefDevToolsMessageObserverCppToC::Get(self)->OnDevToolsAgentDetached(
-      CefBrowserCToCpp::Wrap(browser));
+      CefBrowserCToCpp_Wrap(browser));
 }
 
 }  // namespace
@@ -184,7 +185,7 @@ CefCppToCRefCounted<CefDevToolsMessageObserverCppToC,
                     CefDevToolsMessageObserver,
                     cef_dev_tools_message_observer_t>::
     UnwrapDerived(CefWrapperType type, cef_dev_tools_message_observer_t* s) {
-  DCHECK(false) << "Unexpected class type: " << type;
+  CHECK(false) << __func__ << " called with unexpected class type " << type;
   return nullptr;
 }
 

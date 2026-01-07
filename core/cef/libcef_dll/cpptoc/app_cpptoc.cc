@@ -1,4 +1,4 @@
-// Copyright (c) 2023 The Chromium Embedded Framework Authors. All rights
+// Copyright (c) 2025 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 //
@@ -9,10 +9,11 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=3b8d5f1990e9638e0baf2c3351c779f53c8b868a$
+// $hash=cf6e46e8dab4acfcb0b07220ecc22e989854466d$
 //
 
 #include "libcef_dll/cpptoc/app_cpptoc.h"
+
 #include "libcef_dll/cpptoc/browser_process_handler_cpptoc.h"
 #include "libcef_dll/cpptoc/render_process_handler_cpptoc.h"
 #include "libcef_dll/cpptoc/resource_bundle_handler_cpptoc.h"
@@ -42,7 +43,7 @@ void CEF_CALLBACK app_on_before_command_line_processing(
 
   // Execute
   CefAppCppToC::Get(self)->OnBeforeCommandLineProcessing(
-      CefString(process_type), CefCommandLineCToCpp::Wrap(command_line));
+      CefString(process_type), CefCommandLineCToCpp_Wrap(command_line));
 }
 
 void CEF_CALLBACK
@@ -62,7 +63,7 @@ app_on_register_custom_schemes(struct _cef_app_t* self,
 
   // Translate param: registrar; type: rawptr_diff
   CefOwnPtr<CefSchemeRegistrar> registrarPtr(
-      CefSchemeRegistrarCToCpp::Wrap(registrar));
+      CefSchemeRegistrarCToCpp_Wrap(registrar));
 
   // Execute
   CefAppCppToC::Get(self)->OnRegisterCustomSchemes(registrarPtr.get());
@@ -82,7 +83,7 @@ app_get_resource_bundle_handler(struct _cef_app_t* self) {
       CefAppCppToC::Get(self)->GetResourceBundleHandler();
 
   // Return type: refptr_same
-  return CefResourceBundleHandlerCppToC::Wrap(_retval);
+  return CefResourceBundleHandlerCppToC_Wrap(_retval);
 }
 
 struct _cef_browser_process_handler_t* CEF_CALLBACK
@@ -99,7 +100,7 @@ app_get_browser_process_handler(struct _cef_app_t* self) {
       CefAppCppToC::Get(self)->GetBrowserProcessHandler();
 
   // Return type: refptr_same
-  return CefBrowserProcessHandlerCppToC::Wrap(_retval);
+  return CefBrowserProcessHandlerCppToC_Wrap(_retval);
 }
 
 struct _cef_render_process_handler_t* CEF_CALLBACK
@@ -116,7 +117,7 @@ app_get_render_process_handler(struct _cef_app_t* self) {
       CefAppCppToC::Get(self)->GetRenderProcessHandler();
 
   // Return type: refptr_same
-  return CefRenderProcessHandlerCppToC::Wrap(_retval);
+  return CefRenderProcessHandlerCppToC_Wrap(_retval);
 }
 
 }  // namespace
@@ -141,7 +142,7 @@ CefRefPtr<CefApp>
 CefCppToCRefCounted<CefAppCppToC, CefApp, cef_app_t>::UnwrapDerived(
     CefWrapperType type,
     cef_app_t* s) {
-  DCHECK(false) << "Unexpected class type: " << type;
+  CHECK(false) << __func__ << " called with unexpected class type " << type;
   return nullptr;
 }
 

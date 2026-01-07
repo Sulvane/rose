@@ -1,4 +1,4 @@
-// Copyright (c) 2023 The Chromium Embedded Framework Authors. All rights
+// Copyright (c) 2025 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 //
@@ -9,19 +9,19 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=439e6639c3e7a3f99de34d6c499b1c6766dc7fa7$
+// $hash=b800cc37305836b785267206c39f3a0939252281$
 //
 
 #include "libcef_dll/ctocpp/shared_process_message_builder_ctocpp.h"
+
 #include "libcef_dll/ctocpp/process_message_ctocpp.h"
 #include "libcef_dll/shutdown_checker.h"
 
 // STATIC METHODS - Body may be edited by hand.
 
 NO_SANITIZE("cfi-icall")
-CefRefPtr<CefSharedProcessMessageBuilder>
-CefSharedProcessMessageBuilder::Create(const CefString& name,
-                                       size_t byte_size) {
+CefRefPtr<CefSharedProcessMessageBuilder> CefSharedProcessMessageBuilder::
+    Create(const CefString& name, size_t byte_size) {
   shutdown_checker::AssertNotShutdown();
 
   // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
@@ -33,11 +33,11 @@ CefSharedProcessMessageBuilder::Create(const CefString& name,
   }
 
   // Execute
-  cef_shared_process_message_builder_t* _retval =
+  auto* _retval =
       cef_shared_process_message_builder_create(name.GetStruct(), byte_size);
 
   // Return type: refptr_same
-  return CefSharedProcessMessageBuilderCToCpp::Wrap(_retval);
+  return CefSharedProcessMessageBuilderCToCpp_Wrap(_retval);
 }
 
 // VIRTUAL METHODS - Body may be edited by hand.
@@ -45,8 +45,8 @@ CefSharedProcessMessageBuilder::Create(const CefString& name,
 NO_SANITIZE("cfi-icall") bool CefSharedProcessMessageBuilderCToCpp::IsValid() {
   shutdown_checker::AssertNotShutdown();
 
-  cef_shared_process_message_builder_t* _struct = GetStruct();
-  if (CEF_MEMBER_MISSING(_struct, is_valid)) {
+  auto* _struct = GetStruct();
+  if (!_struct->is_valid) {
     return false;
   }
 
@@ -62,8 +62,8 @@ NO_SANITIZE("cfi-icall") bool CefSharedProcessMessageBuilderCToCpp::IsValid() {
 NO_SANITIZE("cfi-icall") size_t CefSharedProcessMessageBuilderCToCpp::Size() {
   shutdown_checker::AssertNotShutdown();
 
-  cef_shared_process_message_builder_t* _struct = GetStruct();
-  if (CEF_MEMBER_MISSING(_struct, size)) {
+  auto* _struct = GetStruct();
+  if (!_struct->size) {
     return 0;
   }
 
@@ -79,15 +79,17 @@ NO_SANITIZE("cfi-icall") size_t CefSharedProcessMessageBuilderCToCpp::Size() {
 NO_SANITIZE("cfi-icall") void* CefSharedProcessMessageBuilderCToCpp::Memory() {
   shutdown_checker::AssertNotShutdown();
 
-  cef_shared_process_message_builder_t* _struct = GetStruct();
-  if (CEF_MEMBER_MISSING(_struct, memory)) {
-    return NULL;
+  auto* _struct = GetStruct();
+  if (!_struct->memory) {
+    return nullptr;
   }
+
+  // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
 
   // Execute
   void* _retval = _struct->memory(_struct);
 
-  // Return type: simple
+  // Return type: simple_byaddr
   return _retval;
 }
 
@@ -95,18 +97,18 @@ NO_SANITIZE("cfi-icall")
 CefRefPtr<CefProcessMessage> CefSharedProcessMessageBuilderCToCpp::Build() {
   shutdown_checker::AssertNotShutdown();
 
-  cef_shared_process_message_builder_t* _struct = GetStruct();
-  if (CEF_MEMBER_MISSING(_struct, build)) {
+  auto* _struct = GetStruct();
+  if (!_struct->build) {
     return nullptr;
   }
 
   // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
 
   // Execute
-  cef_process_message_t* _retval = _struct->build(_struct);
+  auto* _retval = _struct->build(_struct);
 
   // Return type: refptr_same
-  return CefProcessMessageCToCpp::Wrap(_retval);
+  return CefProcessMessageCToCpp_Wrap(_retval);
 }
 
 // CONSTRUCTOR - Do not edit by hand.
@@ -125,7 +127,7 @@ CefCToCppRefCounted<CefSharedProcessMessageBuilderCToCpp,
                     CefSharedProcessMessageBuilder,
                     cef_shared_process_message_builder_t>::
     UnwrapDerived(CefWrapperType type, CefSharedProcessMessageBuilder* c) {
-  DCHECK(false) << "Unexpected class type: " << type;
+  CHECK(false) << __func__ << " called with unexpected class type " << type;
   return nullptr;
 }
 

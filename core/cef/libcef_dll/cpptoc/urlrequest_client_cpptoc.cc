@@ -1,4 +1,4 @@
-// Copyright (c) 2023 The Chromium Embedded Framework Authors. All rights
+// Copyright (c) 2025 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 //
@@ -9,10 +9,11 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=a06a115eda2d02beb98b73713fd60119a21eb67c$
+// $hash=2bc5e0ea3095ce2944bb45ab64483ea4599ed0eb$
 //
 
 #include "libcef_dll/cpptoc/urlrequest_client_cpptoc.h"
+
 #include "libcef_dll/ctocpp/auth_callback_ctocpp.h"
 #include "libcef_dll/ctocpp/urlrequest_ctocpp.h"
 #include "libcef_dll/shutdown_checker.h"
@@ -23,7 +24,7 @@ namespace {
 
 void CEF_CALLBACK
 urlrequest_client_on_request_complete(struct _cef_urlrequest_client_t* self,
-                                      cef_urlrequest_t* request) {
+                                      struct _cef_urlrequest_t* request) {
   shutdown_checker::AssertNotShutdown();
 
   // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
@@ -40,12 +41,12 @@ urlrequest_client_on_request_complete(struct _cef_urlrequest_client_t* self,
 
   // Execute
   CefURLRequestClientCppToC::Get(self)->OnRequestComplete(
-      CefURLRequestCToCpp::Wrap(request));
+      CefURLRequestCToCpp_Wrap(request));
 }
 
 void CEF_CALLBACK
 urlrequest_client_on_upload_progress(struct _cef_urlrequest_client_t* self,
-                                     cef_urlrequest_t* request,
+                                     struct _cef_urlrequest_t* request,
                                      int64_t current,
                                      int64_t total) {
   shutdown_checker::AssertNotShutdown();
@@ -64,12 +65,12 @@ urlrequest_client_on_upload_progress(struct _cef_urlrequest_client_t* self,
 
   // Execute
   CefURLRequestClientCppToC::Get(self)->OnUploadProgress(
-      CefURLRequestCToCpp::Wrap(request), current, total);
+      CefURLRequestCToCpp_Wrap(request), current, total);
 }
 
 void CEF_CALLBACK
 urlrequest_client_on_download_progress(struct _cef_urlrequest_client_t* self,
-                                       cef_urlrequest_t* request,
+                                       struct _cef_urlrequest_t* request,
                                        int64_t current,
                                        int64_t total) {
   shutdown_checker::AssertNotShutdown();
@@ -88,12 +89,12 @@ urlrequest_client_on_download_progress(struct _cef_urlrequest_client_t* self,
 
   // Execute
   CefURLRequestClientCppToC::Get(self)->OnDownloadProgress(
-      CefURLRequestCToCpp::Wrap(request), current, total);
+      CefURLRequestCToCpp_Wrap(request), current, total);
 }
 
 void CEF_CALLBACK
 urlrequest_client_on_download_data(struct _cef_urlrequest_client_t* self,
-                                   cef_urlrequest_t* request,
+                                   struct _cef_urlrequest_t* request,
                                    const void* data,
                                    size_t data_length) {
   shutdown_checker::AssertNotShutdown();
@@ -117,7 +118,7 @@ urlrequest_client_on_download_data(struct _cef_urlrequest_client_t* self,
 
   // Execute
   CefURLRequestClientCppToC::Get(self)->OnDownloadData(
-      CefURLRequestCToCpp::Wrap(request), data, data_length);
+      CefURLRequestCToCpp_Wrap(request), data, data_length);
 }
 
 int CEF_CALLBACK
@@ -127,7 +128,7 @@ urlrequest_client_get_auth_credentials(struct _cef_urlrequest_client_t* self,
                                        int port,
                                        const cef_string_t* realm,
                                        const cef_string_t* scheme,
-                                       cef_auth_callback_t* callback) {
+                                       struct _cef_auth_callback_t* callback) {
   shutdown_checker::AssertNotShutdown();
 
   // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
@@ -156,7 +157,7 @@ urlrequest_client_get_auth_credentials(struct _cef_urlrequest_client_t* self,
   // Execute
   bool _retval = CefURLRequestClientCppToC::Get(self)->GetAuthCredentials(
       isProxy ? true : false, CefString(host), port, CefString(realm),
-      CefString(scheme), CefAuthCallbackCToCpp::Wrap(callback));
+      CefString(scheme), CefAuthCallbackCToCpp_Wrap(callback));
 
   // Return type: bool
   return _retval;
@@ -186,7 +187,7 @@ CefRefPtr<CefURLRequestClient> CefCppToCRefCounted<
     CefURLRequestClient,
     cef_urlrequest_client_t>::UnwrapDerived(CefWrapperType type,
                                             cef_urlrequest_client_t* s) {
-  DCHECK(false) << "Unexpected class type: " << type;
+  CHECK(false) << __func__ << " called with unexpected class type " << type;
   return nullptr;
 }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2023 The Chromium Embedded Framework Authors. All rights
+// Copyright (c) 2025 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 //
@@ -9,10 +9,11 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=7f625b08e4c82a608dd7178b571f80fce5fe0d70$
+// $hash=7edcf56322bf94e9dd904a225a191081f184732f$
 //
 
 #include "libcef_dll/cpptoc/resource_bundle_handler_cpptoc.h"
+
 #include "libcef_dll/shutdown_checker.h"
 
 namespace {
@@ -167,7 +168,7 @@ CefRefPtr<CefResourceBundleHandler> CefCppToCRefCounted<
     cef_resource_bundle_handler_t>::UnwrapDerived(CefWrapperType type,
                                                   cef_resource_bundle_handler_t*
                                                       s) {
-  DCHECK(false) << "Unexpected class type: " << type;
+  CHECK(false) << __func__ << " called with unexpected class type " << type;
   return nullptr;
 }
 

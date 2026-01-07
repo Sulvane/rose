@@ -1,4 +1,4 @@
-// Copyright (c) 2023 The Chromium Embedded Framework Authors. All rights
+// Copyright (c) 2025 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 //
@@ -9,10 +9,11 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=403513566867d0fd85166242648f269fac987ca5$
+// $hash=edcbd0a56d4bad832f4761cfbd7207f83af817f8$
 //
 
 #include "libcef_dll/cpptoc/response_filter_cpptoc.h"
+
 #include "libcef_dll/shutdown_checker.h"
 
 namespace {
@@ -115,7 +116,7 @@ CefRefPtr<CefResponseFilter> CefCppToCRefCounted<
     CefResponseFilter,
     cef_response_filter_t>::UnwrapDerived(CefWrapperType type,
                                           cef_response_filter_t* s) {
-  DCHECK(false) << "Unexpected class type: " << type;
+  CHECK(false) << __func__ << " called with unexpected class type " << type;
   return nullptr;
 }
 

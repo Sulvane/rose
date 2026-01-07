@@ -1,4 +1,4 @@
-// Copyright (c) 2023 The Chromium Embedded Framework Authors. All rights
+// Copyright (c) 2025 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 //
@@ -9,10 +9,11 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=22f71b1cb703d48b29d6e4eefb294fd713b5bf0e$
+// $hash=e649e91baa57c68b4d2e2a5dced84f9b2aaffc91$
 //
 
 #include "libcef_dll/cpptoc/media_observer_cpptoc.h"
+
 #include "libcef_dll/ctocpp/media_route_ctocpp.h"
 #include "libcef_dll/ctocpp/media_sink_ctocpp.h"
 #include "libcef_dll/shutdown_checker.h"
@@ -43,7 +44,7 @@ media_observer_on_sinks(struct _cef_media_observer_t* self,
   std::vector<CefRefPtr<CefMediaSink>> sinksList;
   if (sinksCount > 0) {
     for (size_t i = 0; i < sinksCount; ++i) {
-      CefRefPtr<CefMediaSink> sinksVal = CefMediaSinkCToCpp::Wrap(sinks[i]);
+      CefRefPtr<CefMediaSink> sinksVal = CefMediaSinkCToCpp_Wrap(sinks[i]);
       sinksList.push_back(sinksVal);
     }
   }
@@ -74,7 +75,7 @@ media_observer_on_routes(struct _cef_media_observer_t* self,
   std::vector<CefRefPtr<CefMediaRoute>> routesList;
   if (routesCount > 0) {
     for (size_t i = 0; i < routesCount; ++i) {
-      CefRefPtr<CefMediaRoute> routesVal = CefMediaRouteCToCpp::Wrap(routes[i]);
+      CefRefPtr<CefMediaRoute> routesVal = CefMediaRouteCToCpp_Wrap(routes[i]);
       routesList.push_back(routesVal);
     }
   }
@@ -103,7 +104,7 @@ void CEF_CALLBACK media_observer_on_route_state_changed(
 
   // Execute
   CefMediaObserverCppToC::Get(self)->OnRouteStateChanged(
-      CefMediaRouteCToCpp::Wrap(route), state);
+      CefMediaRouteCToCpp_Wrap(route), state);
 }
 
 void CEF_CALLBACK
@@ -132,7 +133,7 @@ media_observer_on_route_message_received(struct _cef_media_observer_t* self,
 
   // Execute
   CefMediaObserverCppToC::Get(self)->OnRouteMessageReceived(
-      CefMediaRouteCToCpp::Wrap(route), message, message_size);
+      CefMediaRouteCToCpp_Wrap(route), message, message_size);
 }
 
 }  // namespace
@@ -159,7 +160,7 @@ CefRefPtr<CefMediaObserver> CefCppToCRefCounted<
     CefMediaObserver,
     cef_media_observer_t>::UnwrapDerived(CefWrapperType type,
                                          cef_media_observer_t* s) {
-  DCHECK(false) << "Unexpected class type: " << type;
+  CHECK(false) << __func__ << " called with unexpected class type " << type;
   return nullptr;
 }
 

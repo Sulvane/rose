@@ -1,4 +1,4 @@
-// Copyright (c) 2023 The Chromium Embedded Framework Authors. All rights
+// Copyright (c) 2025 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 //
@@ -9,10 +9,11 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=f663466a6f1faeac7a351bb5af13cb40224b3dc6$
+// $hash=7a74999fbd77d44539965479d005eda42f1edc14$
 //
 
 #include "libcef_dll/cpptoc/keyboard_handler_cpptoc.h"
+
 #include "libcef_dll/ctocpp/browser_ctocpp.h"
 #include "libcef_dll/shutdown_checker.h"
 
@@ -22,7 +23,7 @@ namespace {
 
 int CEF_CALLBACK
 keyboard_handler_on_pre_key_event(struct _cef_keyboard_handler_t* self,
-                                  cef_browser_t* browser,
+                                  struct _cef_browser_t* browser,
                                   const cef_key_event_t* event,
                                   cef_event_handle_t os_event,
                                   int* is_keyboard_shortcut) {
@@ -58,7 +59,7 @@ keyboard_handler_on_pre_key_event(struct _cef_keyboard_handler_t* self,
 
   // Execute
   bool _retval = CefKeyboardHandlerCppToC::Get(self)->OnPreKeyEvent(
-      CefBrowserCToCpp::Wrap(browser), eventVal, os_event,
+      CefBrowserCToCpp_Wrap(browser), eventVal, os_event,
       &is_keyboard_shortcutBool);
 
   // Restore param: is_keyboard_shortcut; type: bool_byaddr
@@ -72,7 +73,7 @@ keyboard_handler_on_pre_key_event(struct _cef_keyboard_handler_t* self,
 
 int CEF_CALLBACK
 keyboard_handler_on_key_event(struct _cef_keyboard_handler_t* self,
-                              cef_browser_t* browser,
+                              struct _cef_browser_t* browser,
                               const cef_key_event_t* event,
                               cef_event_handle_t os_event) {
   shutdown_checker::AssertNotShutdown();
@@ -99,7 +100,7 @@ keyboard_handler_on_key_event(struct _cef_keyboard_handler_t* self,
 
   // Execute
   bool _retval = CefKeyboardHandlerCppToC::Get(self)->OnKeyEvent(
-      CefBrowserCToCpp::Wrap(browser), eventVal, os_event);
+      CefBrowserCToCpp_Wrap(browser), eventVal, os_event);
 
   // Return type: bool
   return _retval;
@@ -126,7 +127,7 @@ CefRefPtr<CefKeyboardHandler> CefCppToCRefCounted<
     CefKeyboardHandler,
     cef_keyboard_handler_t>::UnwrapDerived(CefWrapperType type,
                                            cef_keyboard_handler_t* s) {
-  DCHECK(false) << "Unexpected class type: " << type;
+  CHECK(false) << __func__ << " called with unexpected class type " << type;
   return nullptr;
 }
 

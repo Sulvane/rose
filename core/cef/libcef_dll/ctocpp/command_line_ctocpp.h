@@ -1,4 +1,4 @@
-// Copyright (c) 2023 The Chromium Embedded Framework Authors. All rights
+// Copyright (c) 2025 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 //
@@ -9,7 +9,7 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=c91f76be5a60016fa78afe2813b0d4df3bb422e7$
+// $hash=f8eba606c37434ad1f1007826e79bb553bc40c6d$
 //
 
 #ifndef CEF_LIBCEF_DLL_CTOCPP_COMMAND_LINE_CTOCPP_H_
@@ -21,6 +21,7 @@
 #endif
 
 #include <vector>
+
 #include "include/capi/cef_command_line_capi.h"
 #include "include/cef_command_line.h"
 #include "libcef_dll/ctocpp/ctocpp_ref_counted.h"
@@ -52,10 +53,16 @@ class CefCommandLineCToCpp : public CefCToCppRefCounted<CefCommandLineCToCpp,
   void AppendSwitch(const CefString& name) override;
   void AppendSwitchWithValue(const CefString& name,
                              const CefString& value) override;
+#if CEF_API_ADDED(14100)
+  void RemoveSwitch(const CefString& name) override;
+#endif
   bool HasArguments() override;
   void GetArguments(ArgumentList& arguments) override;
   void AppendArgument(const CefString& argument) override;
   void PrependWrapper(const CefString& wrapper) override;
 };
+
+constexpr auto CefCommandLineCToCpp_Wrap = CefCommandLineCToCpp::Wrap;
+constexpr auto CefCommandLineCToCpp_Unwrap = CefCommandLineCToCpp::Unwrap;
 
 #endif  // CEF_LIBCEF_DLL_CTOCPP_COMMAND_LINE_CTOCPP_H_

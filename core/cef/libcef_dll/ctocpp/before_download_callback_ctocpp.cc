@@ -1,4 +1,4 @@
-// Copyright (c) 2023 The Chromium Embedded Framework Authors. All rights
+// Copyright (c) 2025 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 //
@@ -9,10 +9,11 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=5fee76af45a3305b58bd6a58455fb3e834368077$
+// $hash=038e97d660e185b65a6f4c903a16bec97de1a97d$
 //
 
 #include "libcef_dll/ctocpp/before_download_callback_ctocpp.h"
+
 #include "libcef_dll/shutdown_checker.h"
 
 // VIRTUAL METHODS - Body may be edited by hand.
@@ -22,8 +23,8 @@ void CefBeforeDownloadCallbackCToCpp::Continue(const CefString& download_path,
                                                bool show_dialog) {
   shutdown_checker::AssertNotShutdown();
 
-  cef_before_download_callback_t* _struct = GetStruct();
-  if (CEF_MEMBER_MISSING(_struct, cont)) {
+  auto* _struct = GetStruct();
+  if (!_struct->cont) {
     return;
   }
 
@@ -52,7 +53,7 @@ cef_before_download_callback_t* CefCToCppRefCounted<
     cef_before_download_callback_t>::UnwrapDerived(CefWrapperType type,
                                                    CefBeforeDownloadCallback*
                                                        c) {
-  DCHECK(false) << "Unexpected class type: " << type;
+  CHECK(false) << __func__ << " called with unexpected class type " << type;
   return nullptr;
 }
 

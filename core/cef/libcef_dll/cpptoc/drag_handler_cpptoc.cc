@@ -1,4 +1,4 @@
-// Copyright (c) 2023 The Chromium Embedded Framework Authors. All rights
+// Copyright (c) 2025 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 //
@@ -9,10 +9,11 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=eddbb7f93fd3ffa2548b4286ab8cc854366ffc94$
+// $hash=c8f63523b3f7d6d1321d0b2617d22d12e9163e92$
 //
 
 #include "libcef_dll/cpptoc/drag_handler_cpptoc.h"
+
 #include "libcef_dll/ctocpp/browser_ctocpp.h"
 #include "libcef_dll/ctocpp/drag_data_ctocpp.h"
 #include "libcef_dll/ctocpp/frame_ctocpp.h"
@@ -23,8 +24,8 @@ namespace {
 // MEMBER FUNCTIONS - Body may be edited by hand.
 
 int CEF_CALLBACK drag_handler_on_drag_enter(struct _cef_drag_handler_t* self,
-                                            cef_browser_t* browser,
-                                            cef_drag_data_t* dragData,
+                                            struct _cef_browser_t* browser,
+                                            struct _cef_drag_data_t* dragData,
                                             cef_drag_operations_mask_t mask) {
   shutdown_checker::AssertNotShutdown();
 
@@ -47,7 +48,7 @@ int CEF_CALLBACK drag_handler_on_drag_enter(struct _cef_drag_handler_t* self,
 
   // Execute
   bool _retval = CefDragHandlerCppToC::Get(self)->OnDragEnter(
-      CefBrowserCToCpp::Wrap(browser), CefDragDataCToCpp::Wrap(dragData), mask);
+      CefBrowserCToCpp_Wrap(browser), CefDragDataCToCpp_Wrap(dragData), mask);
 
   // Return type: bool
   return _retval;
@@ -55,7 +56,7 @@ int CEF_CALLBACK drag_handler_on_drag_enter(struct _cef_drag_handler_t* self,
 
 void CEF_CALLBACK drag_handler_on_draggable_regions_changed(
     struct _cef_drag_handler_t* self,
-    cef_browser_t* browser,
+    struct _cef_browser_t* browser,
     struct _cef_frame_t* frame,
     size_t regionsCount,
     cef_draggable_region_t const* regions) {
@@ -94,8 +95,7 @@ void CEF_CALLBACK drag_handler_on_draggable_regions_changed(
 
   // Execute
   CefDragHandlerCppToC::Get(self)->OnDraggableRegionsChanged(
-      CefBrowserCToCpp::Wrap(browser), CefFrameCToCpp::Wrap(frame),
-      regionsList);
+      CefBrowserCToCpp_Wrap(browser), CefFrameCToCpp_Wrap(frame), regionsList);
 }
 
 }  // namespace
@@ -118,7 +118,7 @@ template <>
 CefRefPtr<CefDragHandler>
 CefCppToCRefCounted<CefDragHandlerCppToC, CefDragHandler, cef_drag_handler_t>::
     UnwrapDerived(CefWrapperType type, cef_drag_handler_t* s) {
-  DCHECK(false) << "Unexpected class type: " << type;
+  CHECK(false) << __func__ << " called with unexpected class type " << type;
   return nullptr;
 }
 

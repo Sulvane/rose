@@ -1,4 +1,4 @@
-// Copyright (c) 2023 The Chromium Embedded Framework Authors. All rights
+// Copyright (c) 2025 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 //
@@ -9,7 +9,7 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=78a547d4bdefaadebcaefda5fed81dfe0e0124cb$
+// $hash=29f83f1b1cb826399a6650935142a98ba69280e4$
 //
 
 #ifndef CEF_LIBCEF_DLL_CTOCPP_ZIP_READER_CTOCPP_H_
@@ -47,5 +47,8 @@ class CefZipReaderCToCpp : public CefCToCppRefCounted<CefZipReaderCToCpp,
   int64_t Tell() override;
   bool Eof() override;
 };
+
+constexpr auto CefZipReaderCToCpp_Wrap = CefZipReaderCToCpp::Wrap;
+constexpr auto CefZipReaderCToCpp_Unwrap = CefZipReaderCToCpp::Unwrap;
 
 #endif  // CEF_LIBCEF_DLL_CTOCPP_ZIP_READER_CTOCPP_H_

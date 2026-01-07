@@ -1,4 +1,4 @@
-// Copyright (c) 2023 The Chromium Embedded Framework Authors. All rights
+// Copyright (c) 2025 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 //
@@ -9,10 +9,11 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=9e43a07b0d4886995b29b55315fe8397641293df$
+// $hash=8a3ff13b6e9f74486767ad95d767acfe680c5972$
 //
 
 #include "libcef_dll/cpptoc/media_sink_device_info_callback_cpptoc.h"
+
 #include "libcef_dll/shutdown_checker.h"
 #include "libcef_dll/template_util.h"
 
@@ -74,7 +75,7 @@ CefCppToCRefCounted<CefMediaSinkDeviceInfoCallbackCppToC,
                     cef_media_sink_device_info_callback_t>::
     UnwrapDerived(CefWrapperType type,
                   cef_media_sink_device_info_callback_t* s) {
-  DCHECK(false) << "Unexpected class type: " << type;
+  CHECK(false) << __func__ << " called with unexpected class type " << type;
   return nullptr;
 }
 

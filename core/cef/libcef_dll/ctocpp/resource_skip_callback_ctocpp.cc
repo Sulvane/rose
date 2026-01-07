@@ -1,4 +1,4 @@
-// Copyright (c) 2023 The Chromium Embedded Framework Authors. All rights
+// Copyright (c) 2025 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 //
@@ -9,10 +9,11 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=454b004b9ea5060a540663985fcc76cbf250d69b$
+// $hash=f014f626ee0ddbc224548c83c2b8774f1c2b9fd6$
 //
 
 #include "libcef_dll/ctocpp/resource_skip_callback_ctocpp.h"
+
 #include "libcef_dll/shutdown_checker.h"
 
 // VIRTUAL METHODS - Body may be edited by hand.
@@ -21,8 +22,8 @@ NO_SANITIZE("cfi-icall")
 void CefResourceSkipCallbackCToCpp::Continue(int64_t bytes_skipped) {
   shutdown_checker::AssertNotShutdown();
 
-  cef_resource_skip_callback_t* _struct = GetStruct();
-  if (CEF_MEMBER_MISSING(_struct, cont)) {
+  auto* _struct = GetStruct();
+  if (!_struct->cont) {
     return;
   }
 
@@ -48,7 +49,7 @@ cef_resource_skip_callback_t* CefCToCppRefCounted<
     CefResourceSkipCallback,
     cef_resource_skip_callback_t>::UnwrapDerived(CefWrapperType type,
                                                  CefResourceSkipCallback* c) {
-  DCHECK(false) << "Unexpected class type: " << type;
+  CHECK(false) << __func__ << " called with unexpected class type " << type;
   return nullptr;
 }
 

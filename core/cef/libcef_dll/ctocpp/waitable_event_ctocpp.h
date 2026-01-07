@@ -1,4 +1,4 @@
-// Copyright (c) 2023 The Chromium Embedded Framework Authors. All rights
+// Copyright (c) 2025 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 //
@@ -9,7 +9,7 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=587149e6f5d7d1dd1200f6ce7dd7294da82417cf$
+// $hash=4400b5c6b84d713163cd17f9ac2da62573fe2bfc$
 //
 
 #ifndef CEF_LIBCEF_DLL_CTOCPP_WAITABLE_EVENT_CTOCPP_H_
@@ -41,5 +41,8 @@ class CefWaitableEventCToCpp
   void Wait() override;
   bool TimedWait(int64_t max_ms) override;
 };
+
+constexpr auto CefWaitableEventCToCpp_Wrap = CefWaitableEventCToCpp::Wrap;
+constexpr auto CefWaitableEventCToCpp_Unwrap = CefWaitableEventCToCpp::Unwrap;
 
 #endif  // CEF_LIBCEF_DLL_CTOCPP_WAITABLE_EVENT_CTOCPP_H_

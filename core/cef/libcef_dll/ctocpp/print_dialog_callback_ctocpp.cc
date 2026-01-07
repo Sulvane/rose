@@ -1,4 +1,4 @@
-// Copyright (c) 2023 The Chromium Embedded Framework Authors. All rights
+// Copyright (c) 2025 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 //
@@ -9,10 +9,11 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=0c0a1efb7a6ed661e2947b9b820e1fb5b57e0ad3$
+// $hash=05b7c9cd25da8503d25b47febdfa171f6f05e836$
 //
 
 #include "libcef_dll/ctocpp/print_dialog_callback_ctocpp.h"
+
 #include "libcef_dll/ctocpp/print_settings_ctocpp.h"
 #include "libcef_dll/shutdown_checker.h"
 
@@ -23,8 +24,8 @@ void CefPrintDialogCallbackCToCpp::Continue(
     CefRefPtr<CefPrintSettings> settings) {
   shutdown_checker::AssertNotShutdown();
 
-  cef_print_dialog_callback_t* _struct = GetStruct();
-  if (CEF_MEMBER_MISSING(_struct, cont)) {
+  auto* _struct = GetStruct();
+  if (!_struct->cont) {
     return;
   }
 
@@ -37,14 +38,14 @@ void CefPrintDialogCallbackCToCpp::Continue(
   }
 
   // Execute
-  _struct->cont(_struct, CefPrintSettingsCToCpp::Unwrap(settings));
+  _struct->cont(_struct, CefPrintSettingsCToCpp_Unwrap(settings));
 }
 
 NO_SANITIZE("cfi-icall") void CefPrintDialogCallbackCToCpp::Cancel() {
   shutdown_checker::AssertNotShutdown();
 
-  cef_print_dialog_callback_t* _struct = GetStruct();
-  if (CEF_MEMBER_MISSING(_struct, cancel)) {
+  auto* _struct = GetStruct();
+  if (!_struct->cancel) {
     return;
   }
 
@@ -70,7 +71,7 @@ cef_print_dialog_callback_t* CefCToCppRefCounted<
     CefPrintDialogCallback,
     cef_print_dialog_callback_t>::UnwrapDerived(CefWrapperType type,
                                                 CefPrintDialogCallback* c) {
-  DCHECK(false) << "Unexpected class type: " << type;
+  CHECK(false) << __func__ << " called with unexpected class type " << type;
   return nullptr;
 }
 
